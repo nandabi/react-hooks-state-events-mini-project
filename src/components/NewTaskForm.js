@@ -1,6 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 
-function NewTaskForm() {
+function NewTaskForm({categories, onTaskFormSubmit}) {
+  const [formData, setFormData] = useState({
+    text: "",
+    category: "",
+  })
+  const handleChange = (event) => {
+    const {name, value} = event.target;
+    setFormData({...formData,[name]: value})
+  }
+  const handleSumbit = (event) => {
+    event.preventDefault();
+    onTaskFormSubmit(formData);
+    setFormData({text: "",category: ""});
+  }
+
+
   return (
     <form className="new-task-form">
       <label>
